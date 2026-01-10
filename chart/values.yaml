@@ -1,7 +1,6 @@
 # yaml-language-server: $schema=./values.schema.json
-
 global:
-  domain: c-8eca9b5.kyma.ondemand.com
+  domain: c-2ff68de.kyma.ondemand.com
   imagePullSecret:
     name: kyma-cap-secret
   image:
