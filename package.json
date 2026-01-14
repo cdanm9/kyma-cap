@@ -1,7 +1,7 @@
 {
   "name": "kyma-cap",
   "version": "1.0.0",
-  "description": "A simple CAP project.",
+  "description": "Kyma CAP Application",
   "dependencies": {
     "@cap-js/hana": "^2",
     "@sap/cds": "^9",

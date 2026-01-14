@@ -1,6 +1,6 @@
 apiVersion: v2
 name: kyma-cap
-description: A simple CAP project.
+description: Kyma CAP Application
 type: application
 version: 1.0.0
 appVersion: 1.0.0
