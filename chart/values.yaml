@@ -8,8 +8,6 @@ global:
     tag: latest
 srv:
   bindings:
-    auth:
-      serviceInstanceName: xsuaa
     db:
       serviceInstanceName: hana
     destination:
@@ -29,15 +27,8 @@ srv:
       path: /health
     readiness:
       path: /health
-xsuaa:
-  serviceOfferingName: xsuaa
-  servicePlanName: application
-  parameters:
-    tenant-mode: dedicated
-    oauth2-configuration:
-      redirect-uris:
-        - https://*.{{ tpl .Values.global.domain . }}/**
-    xsappname: kyma-cap-{{ .Release.Namespace }}
+  networkSecurity:
+    allowNamespaceInternal: true
 hana-deployer:
   image:
     repository: cdanm9/kyma-cap-hana-deployer
@@ -59,3 +50,6 @@ destination:
   servicePlanName: lite
   parameters:
     version: 1.0.0
+backendDestinations:
+  srv-api:
+    service: srv
