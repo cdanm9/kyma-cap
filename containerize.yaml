@@ -2,7 +2,7 @@ _schema-version: '1.0'
 repository: docker.io/cdanm9
 tag: latest
 modules:
-  - name: kyma-cap-srv
+  - name: kymacap-srv
     build-parameters:
       buildpack:
         type: nodejs
@@ -10,7 +10,7 @@ modules:
         path: gen/srv
         env:
           BP_NODE_RUN_SCRIPTS: ""
-  - name: kyma-cap-hana-deployer
+  - name: kymacap-hana-deployer
     build-parameters:
       buildpack:
         type: nodejs
@@ -18,7 +18,7 @@ modules:
         path: gen/db
         env:
           BP_NODE_RUN_SCRIPTS: ""
-  - name: kyma-cap-approuter
+  - name: kymacap-approuter
     build-parameters:
       buildpack:
         type: nodejs

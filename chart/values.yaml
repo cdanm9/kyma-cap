@@ -15,7 +15,7 @@ srv:
     destination:
       serviceInstanceName: destination
   image:
-    repository: cdanm9/kyma-cap-srv
+    repository: cdanm9/kymacap-srv
   resources:
     limits:
       ephemeral-storage: 1G
@@ -39,13 +39,15 @@ xsuaa:
     oauth2-configuration:
       redirect-uris:
         - https://*.{{ tpl .Values.global.domain . }}/**
-    xsappname: kyma-cap-{{ .Release.Namespace }}
+    xsappname: kymacap-{{ .Release.Namespace }}
 hana-deployer:
   image:
-    repository: cdanm9/kyma-cap-hana-deployer
+    repository: cdanm9/kymacap-hana-deployer
   bindings:
     hana:
       serviceInstanceName: hana
+    xsuaa:
+      serviceInstanceName: xsuaa
   resources:
     limits:
       cpu: 500m
@@ -61,16 +63,19 @@ destination:
   servicePlanName: lite
   parameters:
     version: 1.0.0
+backendDestinations:
+  srv-api:
+    service: srv
 approuter:
   bindings:
-    auth:
-      serviceInstanceName: xsuaa
-    db:
+    hana:
       serviceInstanceName: hana
+    xsuaa:
+      serviceInstanceName: xsuaa
     destination:
       serviceInstanceName: destination
   image:
-    repository: cdanm9/kyma-cap-approuter
+    repository: cdanm9/kymacap-approuter
   resources:
     limits:
       ephemeral-storage: 1G
@@ -81,12 +86,9 @@ approuter:
       memory: 256M
   health:
     liveness:
-      path: /
+      path: /health
     readiness:
-      path: /
+      path: /health
   envFrom:
     - configMapRef:
         name: "{{ .Release.Name }}-approuter-configmap"
-backendDestinations:
-  srv-api:
-    service: srv
